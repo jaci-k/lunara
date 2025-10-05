@@ -39,6 +39,8 @@
     const db =  getDatabase(app);
 
     // Formulareingabe speichern
+    const form = document.getElementById('dataForm');
+    const list = document.getElementById('dataList');
    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('nameInput').value;
