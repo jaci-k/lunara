@@ -19,7 +19,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js"></script>
 
   <script type="module">
-    import { initializeApp } from "firebase/app";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
     // Deine Firebase-Konfiguration einfügen:
     const firebaseConfig = {
       apiKey: "AIzaSyAs1lsiuxJGcHFKn9uF8vGlREKlBQYwXnM",
