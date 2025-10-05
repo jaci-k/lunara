@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Test</title>
+</head>
+<body>
+  <h1>Meine Firebase-Seite</h1>
+  
+  <form id="dataForm">
+    <input type="text" id="nameInput" placeholder="Dein Name">
+    <button type="submit">Speichern</button>
+  </form>
+
+  <ul id="dataList"></ul>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js"></script>
+
+  <script>
+    // Deine Firebase-Konfiguration einfügen:
+    const firebaseConfig = {
+      apiKey: "DEIN_API_KEY",
+      authDomain: "DEIN_PROJECT.firebaseapp.com",
+      databaseURL: "https://DEIN_PROJECT.firebaseio.com",
+      projectId: "DEIN_PROJECT",
+      storageBucket: "DEIN_PROJECT.appspot.com",
+      messagingSenderId: "DEINE_ID",
+      appId: "DEINE_APP_ID"
+    };
+
+    // Firebase initialisieren
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Formulareingabe speichern
+    const form = document.getElementById('dataForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value;
+      firebase.database().ref('namen').push({ name });
+      form.reset();
+    });
+
+    // Gespeicherte Daten anzeigen
+    const list = document.getElementById('dataList');
+    firebase.database().ref('namen').on('value', (snapshot) => {
+      list.innerHTML = '';
+      snapshot.forEach(child => {
+        const li = document.createElement('li');
+        li.textContent = child.val().name;
+        list.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
