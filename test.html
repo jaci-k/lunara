@@ -39,17 +39,15 @@
     const db =  getDatabase(app);
 
     // Formulareingabe speichern
-    const form = document.getElementById('dataForm');
-    form.addEventListener('submit', (e) => {
+   form.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('nameInput').value;
-      firebase.database().ref('namen').push({ name });
+      push(ref(db, 'namen'), { name });
       form.reset();
     });
 
     // Gespeicherte Daten anzeigen
-    const list = document.getElementById('dataList');
-    firebase.database().ref('namen').on('value', (snapshot) => {
+  onValue(ref(db, 'namen'), (snapshot) => {
       list.innerHTML = '';
       snapshot.forEach(child => {
         const li = document.createElement('li');
