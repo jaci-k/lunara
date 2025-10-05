@@ -35,8 +35,8 @@
     };
 
     // Firebase initialisieren
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    const app = initializeApp(firebaseConfig);
+    const db =  getDatabase(app);
 
     // Formulareingabe speichern
     const form = document.getElementById('dataForm');
