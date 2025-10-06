@@ -217,11 +217,9 @@
 			onValue(entries, (snapshot) => {
 
 		      snapshot.forEach(doc => {
-		          let items = doc.data();
+		          console.log(doc);
+
 		
-		          /* Make data suitable for rendering */
-		          items = JSON.stringify(items);
-		console.log(items);
 		      });
 		
 		    });
