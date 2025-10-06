@@ -219,11 +219,9 @@
 			onValue(entries, (snapshot) => {
 				entriesDiv.innerHTML = '';
 			 	if (snapshot.exists()) {
-					const data = snapshot.val(); // Die Daten als JavaScript-Objekt
-
-    const entriesArray = Object.entries(data).map(([key, entry]) => ({id: key, ...entry}));
-
-    entriesArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+					const data = snapshot.val(); 
+    				const entriesArray = Object.entries(data).map(([key, entry]) => ({id: key, ...entry}));
+					entriesArray.sort((a, b) => new Date(b.date) - new Date(a.date));
 					
 					entriesArray.forEach((entry) => {
 						const div = document.createElement('div');
@@ -242,7 +240,7 @@
 						entriesDiv.appendChild(div);
 			          });
 			
-					 updateChart(Object.values(data));
+					 updateChart(entriesArray);
 				} else {
 					entriesDiv.innerHTML = '<div class="text-gray-600">Noch keine Einträge — lege los! ✨</div>';
 					if (chart) chart.destroy();
