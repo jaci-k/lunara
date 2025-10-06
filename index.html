@@ -214,16 +214,14 @@
 
 		function loadEntries() {
 			const entries = ref(db, 'entries');
-			onValue(entries, (snapshot) => {
 
-		      snapshot.forEach(doc => {
-		          console.log(doc);
+onValue(entries, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+});
 
-		
-		      });
-		
-		    });
 			
+	
 			
 
 		}
