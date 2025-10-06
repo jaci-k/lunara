@@ -302,8 +302,9 @@ onValue(entries, (snapshot) => {
 				form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
 				form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
 				document.getElementById('notes').value = entry.notes;
-				console.log(entry.symptoms);
-				form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
+				if (entry?.symptoms) {
+				  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
+				}				
 				editIndexInput.value = id;
 			});
 		}
