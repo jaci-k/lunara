@@ -17,6 +17,19 @@
 @tailwind utilities;
 </style>
 <body class="bg-pink-50 min-h-screen flex flex-col items-center p-6">
+	<div id="login-container">
+	  <h2>Login</h2>
+	  <input type="email" id="email" placeholder="E-Mail" />
+	  <input type="password" id="password" placeholder="Passwort" />
+	  <button id="login-btn">Login</button>
+	  <p id="login-error" style="color: red;"></p>
+	</div>
+	
+	<div id="main-content" style="display: none;">
+	  <!-- Dein geschützter Seiteninhalt -->
+	  <h1>Willkommen!</h1>
+	  <button onclick="logout()">Logout</button>
+	</div>
 <div class="grid lg:grid-cols-3 gap-12">
 	<div class="">
 
@@ -183,7 +196,8 @@
 
 	    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 
-	    import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+	    import { getDatabase, ref, push, onValue, remove, set,  getAuth,  signInWithEmailAndPassword,  onAuthStateChanged,  signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+		
 	
 	    // Deine Firebase-Konfiguration einfügen:
 	    const firebaseConfig = {
@@ -201,6 +215,37 @@
 	    const app = initializeApp(firebaseConfig);
 	    const db =  getDatabase(app);
 
+		
+		document.getElementById("login-btn").addEventListener("click", () => {
+		  const email = document.getElementById("email").value;
+		  const password = document.getElementById("password").value;
+		
+		  signInWithEmailAndPassword(auth, email, password)
+		    .then(() => {
+		      // Login erfolgreich – Weiterleitung oder Anzeige
+		      document.getElementById("login-container").style.display = "none";
+		      document.getElementById("main-content").style.display = "block";
+		    })
+		    .catch((error) => {
+		      document.getElementById("login-error").textContent = error.message;
+		    });
+		});
+		
+		onAuthStateChanged(auth, (user) => {
+		  if (user) {
+		    // Benutzer ist eingeloggt
+		    document.getElementById("login-container").style.display = "none";
+		    document.getElementById("main-content").style.display = "block";
+		  } else {
+		    // Nicht eingeloggt
+		    document.getElementById("login-container").style.display = "block";
+		    document.getElementById("main-content").style.display = "none";
+		  }
+		});
+		
+		function logout() {
+		  signOut(auth);
+		}			
 			
 		const form = document.getElementById('trackerForm');
 		const entriesDiv = document.getElementById('entries');
