@@ -15,12 +15,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-input:checked + label {
-  background-color: LightSeaGreen;
-}
 </style>
 <body class="bg-pink-50 min-h-screen flex flex-col items-center p-6">
-<div class="grid lg-grid-cols-3 gap-12">
+<div class="grid lg:grid-cols-3 gap-12">
 	<div class="">
 
 	  <h1 class="text-3xl font-bold text-pink-700 mb-6">🌸 Mein Zyklus Tracker</h1>
@@ -217,13 +214,8 @@ input:checked + label {
 
 		function loadEntries() {
 			const entries = ref(db, 'entries');
-			onValue(entries, (snapshot) => {
-			  const data = snapshot.val();
-			  console.log(data); // Daten aus der Datenbank ausgeben
-			});
+			 console.log(entries);
 
-
-			
 		}
 
 		function updateChart(sortedEntries) {
