@@ -296,7 +296,7 @@ onValue(entries, (snapshot) => {
 
 		window.editEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
-			if (object.exists()) {
+			if (object) {
 				onValue(object, (snapshot) => {
 					const entry = snapshot.val(); 
 					dateInput.value = entry.date;
