@@ -284,11 +284,14 @@ onValue(entries, (snapshot) => {
 		  
 			const notes = document.getElementById('notes').value;
 			const symptoms = Array.from(form.querySelectorAll('input[name="symptom"]:checked')).map(cb => cb.value);
-
 			const entryToSave = {date, mood, energy, symptoms, notes};
-
-    		push(ref(db, "entries/"), entryToSave);
-					
+			console.log(editIndexInput.value);
+			if (editIndexInput.value) {
+				push(ref(db, "entries/" + editIndexInput.value), entryToSave);
+				editIndexInput.value = '';
+			} else {
+				push(ref(db, "entries/"), entryToSave);
+			}
 			form.reset();
 			setToday();
 			loadEntries();			
