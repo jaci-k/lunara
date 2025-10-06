@@ -70,7 +70,11 @@
 		    document.getElementById("main-content").style.display = "none";
 		  }
 		});
-		
+		document.getElementById("password").addEventListener("keyup", function (event) {
+		  if (event.key === "Enter") {
+		    document.getElementById("login-btn").click();
+		  }
+		});
 		window.logout = function () {
 		  signOut(auth);
 		}			
@@ -205,7 +209,7 @@
 		loadEntries();
 	  </script>
 	
-<body class="bg-pink-50 min-h-screen flex flex-col items-center p-6">
+<body>
 	<div id="login-container">
 		<div class="min-h-screen flex items-center justify-center bg-gray-100">
 		  <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
@@ -231,23 +235,19 @@
 		      />
 		    </div>
 		
-		    <button
-		      id="login-btn"
-		      class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-		    >
+		    <button id="login-btn" class="w-full bg-pink-600 text-white py-2 rounded-md hover:bg-pink-700 transition">
 		      Login
 		    </button>
 		
 		    <p id="login-error" class="text-red-500 text-sm mt-4 text-center"></p>
 		  </div>
 		</div>
-
-		
 	</div>
 	
-	<div id="main-content" style="display: none;">
-		<button onclick="logout()">Logout</button>
-
+	<div id="main-content" class="bg-pink-50 min-h-screen flex flex-col items-center p-6" style="display: none;">
+		<div class="flex justify-end">
+			<button class="p-3 mb-6 bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600 transition" onclick="logout()">Logout</button>
+		</div>
 		<div class="grid lg:grid-cols-3 gap-12">
 			<div>
 			  <h1 class="text-3xl font-bold text-pink-700 mb-6">🌸 Mein Zyklus Tracker</h1>
