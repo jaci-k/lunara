@@ -308,8 +308,9 @@ onValue(entries, (snapshot) => {
 					  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
 					}				
 					editIndexInput.value = id;
-				});
-			}
+				}
+			});
+			
 		}
 
 		window.deleteEntry = function(id) {
