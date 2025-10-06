@@ -24,11 +24,11 @@
 
 	    import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 		import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+		  getAuth,
+		  signInWithEmailAndPassword,
+		  onAuthStateChanged,
+		  signOut
+		} from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 	
 	    // Deine Firebase-Konfiguration einfügen:
 	    const firebaseConfig = {
@@ -373,15 +373,14 @@
 	  </form>
 	</div>
 	<div class="">
-
-		<!-- Einträge -->
-		<h2 class="text-2xl font-semibold text-pink-700 mb-4">📖 Meine Einträge</h2>
-		<div id="entries" class="w-full max-w-md space-y-4"></div>
-	</div>
-	<div class="">
 		<!-- Diagramm -->
 		<h2 class="text-2xl font-semibold text-pink-700 mb-4">📊 Auswertung</h2>
 		<canvas id="chart" class="w-full max-w-2xl bg-white p-4 rounded-2xl shadow-md"></canvas>
+	</div>
+	<div class="">
+		<!-- Einträge -->
+		<h2 class="text-2xl font-semibold text-pink-700 mb-4">📖 Meine Einträge</h2>
+		<div id="entries" class="w-full max-w-md space-y-4"></div>
 	</div>
 </div> 
 
