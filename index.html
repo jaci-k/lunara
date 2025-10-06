@@ -216,7 +216,7 @@ input:checked + label {
 		}
 
 		function loadEntries() {
-			const entries = ref(database, 'entries');
+			const entries = ref(db, 'entries');
 			onValue(entries, (snapshot) => {
 			  const data = snapshot.val();
 			  console.log(data); // Daten aus der Datenbank ausgeben
