@@ -298,11 +298,11 @@ onValue(entries, (snapshot) => {
 		  const object = ref(db, 'entries/' + id);
 			onValue(object, (snapshot) => {
 				const entry = snapshot.val(); 
-				console.log(entry);
 				dateInput.value = entry.date;
 				form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
 				form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
 				document.getElementById('notes').value = entry.notes;
+				console.log(entry.symptoms);
 				form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
 				editIndexInput.value = id;
 			});
@@ -310,13 +310,7 @@ onValue(entries, (snapshot) => {
 
 		window.deleteEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
-			remove(object)
-			      .then(() => {
-        console.log("Eintrag erfolgreich gelöscht");
-      })
-      .catch((error) => {
-        console.error("Fehler beim Löschen:", error);
-      });
+			remove(object);
 			loadEntries();
 		}
 
