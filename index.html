@@ -296,9 +296,10 @@ onValue(entries, (snapshot) => {
 
 		window.editEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
-			if (object) {
-				onValue(object, (snapshot) => {
-					const entry = snapshot.val(); 
+			
+			onValue(object, (snapshot) => {
+				const entry = snapshot.val(); 
+				if (entry) {
 					dateInput.value = entry.date;
 					form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
 					form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
