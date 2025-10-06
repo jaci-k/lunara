@@ -308,7 +308,7 @@ onValue(entries, (snapshot) => {
 
 		window.deleteEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
-			object.remove();
+			object.delete();
 			loadEntries();
 		}
 
