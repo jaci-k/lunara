@@ -287,7 +287,7 @@ onValue(entries, (snapshot) => {
 			const entryToSave = {date, mood, energy, symptoms, notes};
 			console.log(editIndexInput.value);
 			if (editIndexInput.value) {
-				push(ref(db, "entries/" + editIndexInput.value), entryToSave);
+				set(ref(db, "entries/" + editIndexInput.value), entryToSave);
 				editIndexInput.value = '';
 			} else {
 				push(ref(db, "entries/"), entryToSave);
