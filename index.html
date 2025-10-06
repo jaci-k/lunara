@@ -240,7 +240,7 @@
 						entriesDiv.appendChild(div);
 			          });
 			
-					 updateChart(entriesArray);
+					 updateChart(entriesArray.sort((a, b) => new Date(a.date) - new Date(b.date)));
 				} else {
 					entriesDiv.innerHTML = '<div class="text-gray-600">Noch keine Einträge — lege los! ✨</div>';
 					if (chart) chart.destroy();
