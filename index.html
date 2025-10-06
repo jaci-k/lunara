@@ -259,18 +259,13 @@ input:checked + label {
 			const notes = document.getElementById('notes').value;
 			const symptoms = Array.from(form.querySelectorAll('input[name="symptom"]:checked')).map(cb => cb.value);
 
-			let entries = JSON.parse(localStorage.getItem('entries')) || [];
+			const entryToSave = {1: {date, mood, energy, symptoms, notes }};
 
-			if (editIndexInput.value) {
-				entries[editIndexInput.value] = { date, mood, energy, symptoms, notes };
-				editIndexInput.value = '';
-			} else {
-				entries.push({ date, mood, energy, symptoms, notes });
-			}
-			push(ref(db, 'entries'), { entries });
+    		await set(ref(db, "entries/"), entryToSave);
+					
 			form.reset();
 			setToday();
-			loadEntries();
+			loadEntries();			
 		});
 
 		window.editEntry = function(index) {
