@@ -261,7 +261,7 @@ input:checked + label {
 
 			const entryToSave = {1: {date, mood, energy, symptoms, notes }};
 
-    		await set(ref(db, "entries/"), entryToSave);
+    		push(ref(db, "entries/"), entryToSave);
 					
 			form.reset();
 			setToday();
