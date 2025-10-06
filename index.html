@@ -216,7 +216,7 @@
 			const entries = ref(db, 'entries');
 			onValue(entries, (snapshot) => {
 
-		      snapshot.docs.forEach(doc => {
+		      snapshot.forEach(doc => {
 		          let items = doc.data();
 		
 		          /* Make data suitable for rendering */
