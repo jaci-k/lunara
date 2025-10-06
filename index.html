@@ -180,9 +180,8 @@
 
 		<script type="module">
 
-	    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-	    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
-		import { ref, remove } from "firebase/database";
+	    import { initializeApp } from "firebase/database";
+		import { getDatabase, ref, push, onValue, remove} from "firebase/database";
 	
 	    // Deine Firebase-Konfiguration einfügen:
 	    const firebaseConfig = {
