@@ -294,7 +294,7 @@ onValue(entries, (snapshot) => {
 
 		window.editEntry = function(id) {
 		  const object = ref(db, 'entries/' + id);
-			onValue(entries, (snapshot) => {
+			onValue(object, (snapshot) => {
 				const entry = snapshot.val(); 
 				console.log(entry);
 			
