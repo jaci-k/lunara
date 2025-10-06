@@ -312,9 +312,10 @@ onValue(entries, (snapshot) => {
 		window.deleteEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
 			remove(object);
+			form.reset();
+			setToday();
 			loadEntries();
 		}
-
 		setToday();
 		loadEntries();
 	  </script>
