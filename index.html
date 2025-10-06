@@ -220,8 +220,9 @@ onValue(entries, (snapshot) => {
 	entriesDiv.innerHTML = '';
  	if (snapshot.exists()) {
 		const data = snapshot.val(); // Die Daten als JavaScript-Objekt
-		console.log(Object.values(data));
+		
 		Object.entries(data).forEach(([key, entry]) => {
+			console.log(key);
 			const div = document.createElement('div');
 			div.className = 'bg-white rounded-xl shadow-md p-4';
 			div.innerHTML = `
