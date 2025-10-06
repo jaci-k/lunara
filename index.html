@@ -214,8 +214,41 @@
 
 		function loadEntries() {
 			const entries = ref(db, 'entries');
-			 console.log(entries);
+			onValue(entries, (snapshot) => {
+			  const data = snapshot.val();
+			  // Daten aus der Datenbank ausgeben
 
+
+				entriesDiv.innerHTML = '';
+				const sortedEntries = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+				console.log(sortedEntries);
+				  if (sortedEntries.length === 0) {
+					entriesDiv.innerHTML = '<div class="text-gray-600">Noch keine Einträge — lege los! ✨</div>';
+					if (chart) chart.destroy();
+					return;
+				  }
+				  sortedEntries.slice().reverse().forEach((entry, index) => {
+					const div = document.createElement('div');
+					div.className = 'bg-white rounded-xl shadow-md p-4';
+					div.innerHTML = `
+					  <div class="font-bold text-pink-600">${entry.date}</div>
+					  <div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
+					  <div>⚡ Energie: <strong>${entry.energy || '—'}</strong></div>
+					  <div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
+					  <div class="mt-2 text-gray-600">📝 ${entry.notes || '—'}</div>
+					  <div class="mt-3 flex space-x-2">
+						<button onclick="editEntry(${sortedEntries.length - 1 - index})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg">Bearbeiten</button>
+						<button onclick="deleteEntry(${sortedEntries.length - 1 - index})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg">Löschen</button>
+					  </div>
+					`;
+					entriesDiv.appendChild(div);
+				  });
+				  updateChart(sortedEntries);
+
+
+
+				
+			});
 		}
 
 		function updateChart(sortedEntries) {
