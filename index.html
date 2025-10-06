@@ -308,6 +308,7 @@
 					  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
 					}				
 					editIndexInput.value = id;
+					window.scrollTo(0, 0);
 				}
 			});
 			
@@ -316,6 +317,7 @@
 		window.deleteEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
 			remove(object);
+			window.scrollTo(0, 0);
 			form.reset();
 			setToday();
 			loadEntries();
