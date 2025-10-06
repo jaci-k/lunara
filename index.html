@@ -216,40 +216,39 @@
 
 		function loadEntries() {
 			const entries = ref(db, 'entries');
+			onValue(entries, (snapshot) => {
+				entriesDiv.innerHTML = '';
+			 	if (snapshot.exists()) {
+					const data = snapshot.val(); // Die Daten als JavaScript-Objekt
 
-onValue(entries, (snapshot) => {
-	entriesDiv.innerHTML = '';
- 	if (snapshot.exists()) {
-		const data = snapshot.val(); // Die Daten als JavaScript-Objekt
-		
-		Object.entries(data).forEach(([key, entry]) => {
-			const div = document.createElement('div');
-			div.className = 'bg-white rounded-xl shadow-md p-4';
-			div.innerHTML = `
-			<div class="font-bold text-pink-600">${entry.date}</div>
-			<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
-			<div>⚡ Energie: <strong>${entry.energy || '—'}</strong></div>
-			<div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
-			<div class="mt-2 text-gray-600">📝 ${entry.notes || '—'}</div>
-			<div class="mt-3 flex space-x-2">
-			<button onclick="editEntry('${key}')" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg">Bearbeiten</button>
-			<button onclick="deleteEntry('${key}')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg">Löschen</button>
-			</div>
-			`;
-			entriesDiv.appendChild(div);
-          });
+    const entriesArray = Object.entries(data).map(([key, entry]) => ({id: key, ...entry}));
 
-		 updateChart(Object.values(data));
-	} else {
-		entriesDiv.innerHTML = '<div class="text-gray-600">Noch keine Einträge — lege los! ✨</div>';
-		if (chart) chart.destroy();
-		return;
-	}
-
-
-	
-});
-
+    entriesArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+					
+					entriesArray.forEach((entry) => {
+						const div = document.createElement('div');
+						div.className = 'bg-white rounded-xl shadow-md p-4';
+						div.innerHTML = `
+						<div class="font-bold text-pink-600">${entry.date}</div>
+						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
+						<div>⚡ Energie: <strong>${entry.energy || '—'}</strong></div>
+						<div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
+						<div class="mt-2 text-gray-600">📝 ${entry.notes || '—'}</div>
+						<div class="mt-3 flex space-x-2">
+						<button onclick="editEntry('${entry.id}')" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg">Bearbeiten</button>
+						<button onclick="deleteEntry('${entry.id}')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg">Löschen</button>
+						</div>
+						`;
+						entriesDiv.appendChild(div);
+			          });
+			
+					 updateChart(Object.values(data));
+				} else {
+					entriesDiv.innerHTML = '<div class="text-gray-600">Noch keine Einträge — lege los! ✨</div>';
+					if (chart) chart.destroy();
+					return;
+				}
+			});
 		}
 
 		function updateChart(sortedEntries) {
