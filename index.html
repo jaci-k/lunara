@@ -53,7 +53,6 @@
 		
 		  signInWithEmailAndPassword(auth, email, password)
 		    .then(() => {
-		      // Login erfolgreich – Weiterleitung oder Anzeige
 		      document.getElementById("login-container").style.display = "none";
 		      document.getElementById("main-content").style.display = "block";
 		    })
@@ -64,11 +63,9 @@
 		
 		onAuthStateChanged(auth, (user) => {
 		  if (user) {
-		    // Benutzer ist eingeloggt
 		    document.getElementById("login-container").style.display = "none";
 		    document.getElementById("main-content").style.display = "block";
 		  } else {
-		    // Nicht eingeloggt
 		    document.getElementById("login-container").style.display = "block";
 		    document.getElementById("main-content").style.display = "none";
 		  }
@@ -210,179 +207,206 @@
 	
 <body class="bg-pink-50 min-h-screen flex flex-col items-center p-6">
 	<div id="login-container">
-	  <h2>Login</h2>
-	  <input type="email" id="email" placeholder="E-Mail" />
-	  <input type="password" id="password" placeholder="Passwort" />
-	  <button id="login-btn">Login</button>
-	  <p id="login-error" style="color: red;"></p>
+		<div class="min-h-screen flex items-center justify-center bg-gray-100">
+		  <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+		    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
+		
+		    <div class="mb-4">
+		      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-Mail</label>
+		      <input
+		        type="email"
+		        id="email"
+		        placeholder="dein@email.de"
+		        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+		      />
+		    </div>
+		
+		    <div class="mb-6">
+		      <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Passwort</label>
+		      <input
+		        type="password"
+		        id="password"
+		        placeholder="••••••••"
+		        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+		      />
+		    </div>
+		
+		    <button
+		      id="login-btn"
+		      class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+		    >
+		      Login
+		    </button>
+		
+		    <p id="login-error" class="text-red-500 text-sm mt-4 text-center"></p>
+		  </div>
+		</div>
+
+		
 	</div>
 	
 	<div id="main-content" style="display: none;">
-	  <!-- Dein geschützter Seiteninhalt -->
-	  <h1>Willkommen!</h1>
-	  <button onclick="logout()">Logout</button>
+		<button onclick="logout()">Logout</button>
 
-<div class="grid lg:grid-cols-3 gap-12">
-	<div class="">
-
-	  <h1 class="text-3xl font-bold text-pink-700 mb-6">🌸 Mein Zyklus Tracker</h1>
-
-	  <!-- Formular -->
-	  <form id="trackerForm" class="bg-white shadow-md rounded-2xl p-6 w-full max-w-md">
-		<input type="hidden" id="editIndex"> <!-- verstecktes Feld für Bearbeiten -->
-
-		<label for="date" class="block mb-4">
-		  <span class="text-gray-700">Datum:</span>
-		  <input type="date" id="date" required class="mt-1 w-full border rounded-lg p-2">
-		</label>
-
-		<fieldset class="block mb-4">
-		  <legend class="text-gray-700">Stimmung:</legend>
-		  <div class="mt-2 grid grid-cols-5 gap-2 rounded-xl bg-pink-100 p-1">
+		<div class="grid lg:grid-cols-3 gap-12">
 			<div>
-				<input type="radio" name="mood" id="mood_1" value="1" class="peer hidden" />
-				<label for="mood_1" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">1</label>
+			  <h1 class="text-3xl font-bold text-pink-700 mb-6">🌸 Mein Zyklus Tracker</h1>
+			  <!-- Formular -->
+			  <form id="trackerForm" class="bg-white shadow-md rounded-2xl p-6 w-full max-w-md">
+				<input type="hidden" id="editIndex"> <!-- verstecktes Feld für Bearbeiten -->
+		
+				<label for="date" class="block mb-4">
+				  <span class="text-gray-700">Datum:</span>
+				  <input type="date" id="date" required class="mt-1 w-full border rounded-lg p-2">
+				</label>
+		
+				<fieldset class="block mb-4">
+				  <legend class="text-gray-700">Stimmung:</legend>
+				  <div class="mt-2 grid grid-cols-5 gap-2 rounded-xl bg-pink-100 p-1">
+					<div>
+						<input type="radio" name="mood" id="mood_1" value="1" class="peer hidden" />
+						<label for="mood_1" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">1</label>
+					</div>
+					<div>
+						<input type="radio" name="mood" id="mood_2" value="2" class="peer hidden" />
+						<label for="mood_2" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">2</label>
+					</div>
+					<div>
+						<input type="radio" name="mood" id="mood_3" value="3" class="peer hidden" />
+						<label for="mood_3" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">3</label>
+					</div>
+					<div>
+						<input type="radio" name="mood" id="mood_4" value="4" class="peer hidden" />
+						<label for="mood_4" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">4</label>
+					</div>
+					<div>
+						<input type="radio" name="mood" id="mood_5" value="5" class="peer hidden" />
+						<label for="mood_5" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">5</label>
+					</div>		
+				  </div>
+				</fieldset>
+		
+				<fieldset class="block mb-4">
+				  <legend class="text-gray-700">Energielevel:</legend>
+				  <div class="mt-2 grid grid-cols-5 gap-2 rounded-xl bg-pink-100 p-1">
+					<div>
+						<input type="radio" name="energy" id="energy_1" value="1" class="peer hidden" />
+						<label for="energy_1" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">1</label>
+					</div>
+					<div>
+						<input type="radio" name="energy" id="energy_2" value="2" class="peer hidden" />
+						<label for="energy_2" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">2</label>
+					</div>
+					<div>
+						<input type="radio" name="energy" id="energy_3" value="3" class="peer hidden" />
+						<label for="energy_3" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">3</label>
+					</div>
+					<div>
+						<input type="radio" name="energy" id="energy_4" value="4" class="peer hidden" />
+						<label for="energy_4" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">4</label>
+					</div>
+					<div>
+						<input type="radio" name="energy" id="energy_5" value="5" class="peer hidden" />
+						<label for="energy_5" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">5</label>
+					</div>		
+				  </div>
+				</fieldset>
+		
+		
+				<fieldset class="block mb-4">
+				  <legend class="text-gray-700">Symptome:</legend>
+				  <div class="mt-2 grid grid-cols-2 gap-2">
+				  
+					<div class="inline-flex items-center">
+					  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Brustspannen">
+						<input id="Brustspannen" name="symptom" type="checkbox" value="Brustspannen" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
+						<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+						  </svg>
+						</div>
+					  </label>
+					  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Brustspannen">Brustspannen</label>
+					</div>
+					<div class="inline-flex items-center">
+					  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Kopfschmerzen">
+						<input id="Kopfschmerzen" name="symptom" type="checkbox" value="Kopfschmerzen" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
+						<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+						  </svg>
+						</div>
+					  </label>
+					  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Kopfschmerzen">Kopfschmerzen</label>
+					</div>
+					<div class="inline-flex items-center">
+					  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Bauchschmerzen">
+						<input id="Bauchschmerzen" name="symptom" type="checkbox" value="Bauchschmerzen" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
+						<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+						  </svg>
+						</div>
+					  </label>
+					  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Bauchschmerzen">Bauchschmerzen</label>
+					</div>
+					<div class="inline-flex items-center">
+					  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Krämpfe">
+						<input id="Krämpfe" name="symptom" type="checkbox" value="Krämpfe" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
+						<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+						  </svg>
+						</div>
+					  </label>
+					  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Krämpfe">Krämpfe</label>
+					</div>
+					<div class="inline-flex items-center">
+					  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Hautprobleme">
+						<input id="Hautprobleme" name="symptom" type="checkbox" value="Hautprobleme" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
+						<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+						  </svg>
+						</div>
+					  </label>
+					  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Hautprobleme">Hautprobleme</label>
+					</div>
+					<div class="inline-flex items-center">
+					  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Heißhunger">
+						<input id="Heißhunger" name="symptom" type="checkbox" value="Heißhunger" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
+						<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+						  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+							<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+						  </svg>
+						</div>
+					  </label>
+					  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Heißhunger">Heißhunger</label>
+					</div>
+				  </div>
+				</fieldset>
+		
+				<label for="notes" class="block mb-4">
+				  <span class="text-gray-700">Notizen:</span>
+				  <textarea id="notes" class="mt-1 w-full border rounded-lg p-2" rows="3"></textarea>
+				</label>
+		
+				<button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+				  Speichern
+				</button>
+			  </form>
 			</div>
-			<div>
-				<input type="radio" name="mood" id="mood_2" value="2" class="peer hidden" />
-				<label for="mood_2" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">2</label>
+			<div class="">
+				<!-- Diagramm -->
+				<h2 class="text-2xl font-semibold text-pink-700 mb-4">📊 Auswertung</h2>
+				<canvas id="chart" class="w-full max-w-2xl bg-white p-4 rounded-2xl shadow-md"></canvas>
 			</div>
-			<div>
-				<input type="radio" name="mood" id="mood_3" value="3" class="peer hidden" />
-				<label for="mood_3" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">3</label>
+			<div class="">
+				<!-- Einträge -->
+				<h2 class="text-2xl font-semibold text-pink-700 mb-4">📖 Meine Einträge</h2>
+				<div id="entries" class="w-full max-w-md space-y-4"></div>
 			</div>
-			<div>
-				<input type="radio" name="mood" id="mood_4" value="4" class="peer hidden" />
-				<label for="mood_4" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">4</label>
-			</div>
-			<div>
-				<input type="radio" name="mood" id="mood_5" value="5" class="peer hidden" />
-				<label for="mood_5" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">5</label>
-			</div>		
-		  </div>
-		</fieldset>
-
-		<fieldset class="block mb-4">
-		  <legend class="text-gray-700">Energielevel:</legend>
-		  <div class="mt-2 grid grid-cols-5 gap-2 rounded-xl bg-pink-100 p-1">
-			<div>
-				<input type="radio" name="energy" id="energy_1" value="1" class="peer hidden" />
-				<label for="energy_1" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">1</label>
-			</div>
-			<div>
-				<input type="radio" name="energy" id="energy_2" value="2" class="peer hidden" />
-				<label for="energy_2" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">2</label>
-			</div>
-			<div>
-				<input type="radio" name="energy" id="energy_3" value="3" class="peer hidden" />
-				<label for="energy_3" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">3</label>
-			</div>
-			<div>
-				<input type="radio" name="energy" id="energy_4" value="4" class="peer hidden" />
-				<label for="energy_4" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">4</label>
-			</div>
-			<div>
-				<input type="radio" name="energy" id="energy_5" value="5" class="peer hidden" />
-				<label for="energy_5" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-pink-500 peer-checked:font-bold peer-checked:text-white">5</label>
-			</div>		
-		  </div>
-		</fieldset>
-
-
-		<fieldset class="block mb-4">
-		  <legend class="text-gray-700">Symptome:</legend>
-		  <div class="mt-2 grid grid-cols-2 gap-2">
-		  
-			<div class="inline-flex items-center">
-			  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Brustspannen">
-				<input id="Brustspannen" name="symptom" type="checkbox" value="Brustspannen" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
-				<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-					<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-				  </svg>
-				</div>
-			  </label>
-			  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Brustspannen">Brustspannen</label>
-			</div>
-			<div class="inline-flex items-center">
-			  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Kopfschmerzen">
-				<input id="Kopfschmerzen" name="symptom" type="checkbox" value="Kopfschmerzen" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
-				<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-					<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-				  </svg>
-				</div>
-			  </label>
-			  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Kopfschmerzen">Kopfschmerzen</label>
-			</div>
-			<div class="inline-flex items-center">
-			  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Bauchschmerzen">
-				<input id="Bauchschmerzen" name="symptom" type="checkbox" value="Bauchschmerzen" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
-				<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-					<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-				  </svg>
-				</div>
-			  </label>
-			  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Bauchschmerzen">Bauchschmerzen</label>
-			</div>
-			<div class="inline-flex items-center">
-			  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Krämpfe">
-				<input id="Krämpfe" name="symptom" type="checkbox" value="Krämpfe" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
-				<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-					<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-				  </svg>
-				</div>
-			  </label>
-			  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Krämpfe">Krämpfe</label>
-			</div>
-			<div class="inline-flex items-center">
-			  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Hautprobleme">
-				<input id="Hautprobleme" name="symptom" type="checkbox" value="Hautprobleme" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
-				<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-					<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-				  </svg>
-				</div>
-			  </label>
-			  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Hautprobleme">Hautprobleme</label>
-			</div>
-			<div class="inline-flex items-center">
-			  <label class="relative flex cursor-pointer items-center rounded-full p-1" for="Heißhunger">
-				<input id="Heißhunger" name="symptom" type="checkbox" value="Heißhunger" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"/>
-				<div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-				  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
-					<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-				  </svg>
-				</div>
-			  </label>
-			  <label class="mt-px cursor-pointer select-none font-light text-gray-700" for="Heißhunger">Heißhunger</label>
-			</div>
-		  </div>
-		</fieldset>
-
-		<label for="notes" class="block mb-4">
-		  <span class="text-gray-700">Notizen:</span>
-		  <textarea id="notes" class="mt-1 w-full border rounded-lg p-2" rows="3"></textarea>
-		</label>
-
-		<button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-		  Speichern
-		</button>
-	  </form>
-	</div>
-	<div class="">
-		<!-- Diagramm -->
-		<h2 class="text-2xl font-semibold text-pink-700 mb-4">📊 Auswertung</h2>
-		<canvas id="chart" class="w-full max-w-2xl bg-white p-4 rounded-2xl shadow-md"></canvas>
-	</div>
-	<div class="">
-		<!-- Einträge -->
-		<h2 class="text-2xl font-semibold text-pink-700 mb-4">📖 Meine Einträge</h2>
-		<div id="entries" class="w-full max-w-md space-y-4"></div>
-	</div>
-</div> 
+		</div> 
 
 		
 	</div>
