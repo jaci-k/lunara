@@ -216,13 +216,11 @@
 			const entries = ref(db, 'entries');
 
 onValue(entries, (snapshot) => {
-	const data = snapshot.val();
 	entriesDiv.innerHTML = '';
  	if (snapshot.exists()) {
 		const data = snapshot.val(); // Die Daten als JavaScript-Objekt
 		
 		Object.entries(data).forEach(([key, entry]) => {
-			console.log(key);
 			const div = document.createElement('div');
 			div.className = 'bg-white rounded-xl shadow-md p-4';
 			div.innerHTML = `
@@ -296,17 +294,22 @@ onValue(entries, (snapshot) => {
 
 		window.editEntry = function(id) {
 		  const object = ref(db, 'entries/' + id);
-			const entry = object.value;
-console.log(entry);
-		  dateInput.value = entry.date;
-		  form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
-
-		  form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
-		  document.getElementById('notes').value = entry.notes;
-		  
-		  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
-
-		  editIndexInput.value = index;
+			onValue(entries, (snapshot) => {
+				const entry = snapshot.val(); 
+				console.log(entry);
+			
+			
+		
+				  dateInput.value = entry.date;
+				  form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
+		
+				  form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
+				  document.getElementById('notes').value = entry.notes;
+				  
+				  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
+		
+				  editIndexInput.value = index;
+				});
 		}
 
 		window.deleteEntry = function(index) {
