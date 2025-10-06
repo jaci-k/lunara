@@ -216,7 +216,14 @@ input:checked + label {
 		}
 
 		function loadEntries() {
+			const entries = ref(database, 'entries');
+			onValue(entries, (snapshot) => {
+			  const data = snapshot.val();
+			  console.log(data); // Daten aus der Datenbank ausgeben
+			});
 
+
+			
 		}
 
 		function updateChart(sortedEntries) {
