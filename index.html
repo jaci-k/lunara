@@ -295,7 +295,7 @@ onValue(entries, (snapshot) => {
 		});
 
 		window.editEntry = function(id) {
-		  const entry = ref(database, 'yourPath/' + id);
+		  const entry = ref(database, 'entries/' + id);
 console.log(entry);
 		  dateInput.value = entry.date;
 		  form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
