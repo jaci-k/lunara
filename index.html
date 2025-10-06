@@ -62,12 +62,14 @@
 		});
 		
 		onAuthStateChanged(auth, (user) => {
+		  document.getElementById("loading-screen").style.display = "none";
+		
 		  if (user) {
-		    document.getElementById("login-container").style.display = "none";
+		    // Benutzer eingeloggt → Hauptinhalt zeigen
 		    document.getElementById("main-content").style.display = "block";
 		  } else {
+		    // Nicht eingeloggt → Login zeigen
 		    document.getElementById("login-container").style.display = "block";
-		    document.getElementById("main-content").style.display = "none";
 		  }
 		});
 		document.getElementById("password").addEventListener("keyup", function (event) {
@@ -210,7 +212,12 @@
 	  </script>
 	
 <body>
-	<div id="login-container">
+
+	<div id="loading-screen" class="min-h-screen flex items-center justify-center">
+		<p class="text-gray-600">Lade...</p>
+	</div>
+	
+	<div id="login-container" style="display: none;">
 		<div class="min-h-screen flex items-center justify-center bg-gray-100">
 		  <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
 		    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
@@ -410,6 +417,10 @@
 
 		
 	</div>
+	
+
+	
+
 
 </body>
 </html>
