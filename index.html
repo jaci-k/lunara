@@ -217,9 +217,14 @@
 
 onValue(entries, (snapshot) => {
   const data = snapshot.val();
-  console.log(data);
+
+          Object.values(data).forEach(item => { // Wenn Sie nur die Werte benötigen
+            console.log(item); // Verarbeitet jedes Element
+          });
+	
 });
 
+	
 			
 	
 			
