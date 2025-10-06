@@ -20,7 +20,7 @@ input:checked + label {
 }
 </style>
 <body class="bg-pink-50 min-h-screen flex flex-col items-center p-6">
-<div class="grid grid-cols-3 gap-12">
+<div class="grid lg-grid-cols-3 gap-12">
 	<div class="">
 
 	  <h1 class="text-3xl font-bold text-pink-700 mb-6">🌸 Mein Zyklus Tracker</h1>
@@ -259,7 +259,7 @@ input:checked + label {
 			const notes = document.getElementById('notes').value;
 			const symptoms = Array.from(form.querySelectorAll('input[name="symptom"]:checked')).map(cb => cb.value);
 
-			const entryToSave = {1: {date, mood, energy, symptoms, notes }};
+			const entryToSave = {date, mood, energy, symptoms, notes};
 
     		push(ref(db, "entries/"), entryToSave);
 					
