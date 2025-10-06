@@ -219,7 +219,7 @@
 	    // Firebase initialisieren
 	    const app = initializeApp(firebaseConfig);
 	    const db =  getDatabase(app);
-
+		const auth = getAuth(app);
 		
 		document.getElementById("login-btn").addEventListener("click", () => {
 		  const email = document.getElementById("email").value;
