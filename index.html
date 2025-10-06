@@ -310,7 +310,13 @@ onValue(entries, (snapshot) => {
 
 		window.deleteEntry = function(id) {
 			const object = ref(db, 'entries/' + id);
-			object.remove();
+			remove(object)
+			      .then(() => {
+        console.log("Eintrag erfolgreich gelöscht");
+      })
+      .catch((error) => {
+        console.error("Fehler beim Löschen:", error);
+      });
 			loadEntries();
 		}
 
