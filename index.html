@@ -297,26 +297,19 @@ onValue(entries, (snapshot) => {
 			onValue(object, (snapshot) => {
 				const entry = snapshot.val(); 
 				console.log(entry);
-			
-			
-		
-				  dateInput.value = entry.date;
-				  form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
-		
-				  form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
-				  document.getElementById('notes').value = entry.notes;
-				  
-				  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
-		
-				  editIndexInput.value = index;
-				});
+				dateInput.value = entry.date;
+				form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
+				form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
+				document.getElementById('notes').value = entry.notes;
+				form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
+				editIndexInput.value = id;
+			});
 		}
 
-		window.deleteEntry = function(index) {
-		  let entries = JSON.parse(localStorage.getItem('entries')) || [];
-		  entries.splice(index, 1);
-		  localStorage.setItem('entries', JSON.stringify(entries));
-		  loadEntries();
+		window.deleteEntry = function(id) {
+			const object = ref(db, 'entries/' + id);
+			object.remove();
+			loadEntries();
 		}
 
 		setToday();
