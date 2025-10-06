@@ -221,8 +221,7 @@ onValue(entries, (snapshot) => {
  	if (snapshot.exists()) {
 		const data = snapshot.val(); // Die Daten als JavaScript-Objekt
 		console.log(Object.values(data));
-        Object.values(data).forEach(entry => { // Wenn Sie nur die Werte benötigen
-             // Verarbeitet jedes Element
+		Object.entries(data).forEach(([key, entry]) => {
 			const div = document.createElement('div');
 			div.className = 'bg-white rounded-xl shadow-md p-4';
 			div.innerHTML = `
@@ -232,8 +231,8 @@ onValue(entries, (snapshot) => {
 			<div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
 			<div class="mt-2 text-gray-600">📝 ${entry.notes || '—'}</div>
 			<div class="mt-3 flex space-x-2">
-			<button onclick="editEntry(${data})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg">Bearbeiten</button>
-			<button onclick="deleteEntry(${data})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg">Löschen</button>
+			<button onclick="editEntry(${key})" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded-lg">Bearbeiten</button>
+			<button onclick="deleteEntry(${key})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg">Löschen</button>
 			</div>
 			`;
 			entriesDiv.appendChild(div);
@@ -249,11 +248,6 @@ onValue(entries, (snapshot) => {
 
 	
 });
-
-	
-			
-	
-			
 
 		}
 
@@ -300,8 +294,7 @@ onValue(entries, (snapshot) => {
 		});
 
 		window.editEntry = function(index) {
-		  const entries = JSON.parse(localStorage.getItem('entries')) || [];
-		  const entry = entries[index];
+			const entry = ref(db, 'entries/index');
 
 		  dateInput.value = entry.date;
 		  form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
