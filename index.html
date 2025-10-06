@@ -295,18 +295,20 @@ onValue(entries, (snapshot) => {
 		});
 
 		window.editEntry = function(id) {
-		  const object = ref(db, 'entries/' + id);
-			onValue(object, (snapshot) => {
-				const entry = snapshot.val(); 
-				dateInput.value = entry.date;
-				form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
-				form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
-				document.getElementById('notes').value = entry.notes;
-				if (entry?.symptoms) {
-				  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
-				}				
-				editIndexInput.value = id;
-			});
+			const object = ref(db, 'entries/' + id);
+			if (object.exists()) {
+				onValue(object, (snapshot) => {
+					const entry = snapshot.val(); 
+					dateInput.value = entry.date;
+					form.querySelectorAll('input[name="mood"]').forEach(cb => cb.checked = entry.mood.includes(cb.value));
+					form.querySelectorAll('input[name="energy"]').forEach(cb => cb.checked = entry.energy.includes(cb.value));
+					document.getElementById('notes').value = entry.notes;
+					if (entry?.symptoms) {
+					  form.querySelectorAll('input[name="symptom"]').forEach(cb => cb.checked = entry.symptoms.includes(cb.value));
+					}				
+					editIndexInput.value = id;
+				});
+			}
 		}
 
 		window.deleteEntry = function(id) {
