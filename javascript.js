@@ -87,7 +87,7 @@
 						const month = String(entry.date.getMonth() + 1).padStart(2, '0');
 						const year = entry.date.getFullYear();
 						
-						const date = new Intl.DateTimeFormat("de-DE", options).format(valentines) + '' + ${day}.${month}.${year};
+						const date = new Intl.DateTimeFormat("de-DE", options).format(valentines);
 						div.innerHTML = `
 						<div class="font-bold text-pink-600">${date}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
