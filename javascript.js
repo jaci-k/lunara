@@ -82,8 +82,14 @@
 					entriesArray.forEach((entry) => {
 						const div = document.createElement('div');
 						div.className = 'bg-white rounded-xl shadow-md p-4';
+						const options = { weekday: "long" };
+						const day = String(entry.date.getDate()).padStart(2, '0');
+						const month = String(entry.date.getMonth() + 1).padStart(2, '0');
+						const year = entry.date.getFullYear();
+						
+						const date = new Intl.DateTimeFormat("de-DE", options).format(valentines) + '' + ${day}.${month}.${year};
 						div.innerHTML = `
-						<div class="font-bold text-pink-600">${entry.date}</div>
+						<div class="font-bold text-pink-600">${date}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
 						<div>⚡ Energie: <strong>${entry.energy || '—'}</strong></div>
 						<div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
