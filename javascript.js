@@ -83,9 +83,7 @@
 						const div = document.createElement('div');
 						div.className = 'bg-white rounded-xl shadow-md p-4';
 						const options = { weekday: "long" };
-						const day = String(entry.date.getDate()).padStart(2, '0');
-						const month = String(entry.date.getMonth() + 1).padStart(2, '0');
-						const year = entry.date.getFullYear();
+
 						const date = new Intl.DateTimeFormat("de-DE", options).format(valentines);
 						div.innerHTML = `
 						<div class="font-bold text-pink-600">${date}</div>
