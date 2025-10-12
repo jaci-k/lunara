@@ -18,7 +18,7 @@
 </style>
 
 <script type="module" src="javascript.js"></script>
-<script>const symptoms = ["Schmierblutungen", "Stimmungsschwankungen", "Kopfschmerzen", "Bauchschmerzen", "Krämpfe", "Hautprobleme", "Rückenschmerzen", "Brustspannen", "Heißhunger"];</script>
+<script>const symptoms = ["Schmierblutungen", "Stimmungsschankungen", "Kopfschmerzen", "Bauchschmerzen", "Krämpfe", "Hautprobleme", "Rückenschmerzen", "Brustspannen", "Heißhunger"];</script>
 <body>
 
 	<div id="loading-screen" class="min-h-screen flex items-center justify-center">
@@ -131,14 +131,20 @@
 				<fieldset class="block mb-4">
 				  <legend class="text-gray-700">Symptome:</legend>
 				  <div id="symptoms" class="mt-2 grid grid-cols-2 gap-2">
-						<select id="symptomsSelectBox" name="symptoms" multiple size="5"></select>
-						<script>
-							const symptomsSelect = document.getElementById('symptomsSelectBox');
-							for (const symptom of symptoms) {
-							  const option = new Option(symptom, symptom.toLowerCase());
-							  symptomsSelectBox.add(option);
-							}
-						</script>
+					<script>
+						const symptomsDiv = document.getElementById('symptoms');
+						symptoms.forEach(symptom => {
+					      fetch("symptom.html")
+					        .then(res => res.text())
+					        .then(html => {
+					          html = html.replace(/{{symptom}}/g, symptom);
+					          const div = document.createElement("div");
+					          div.innerHTML = html;
+					          symptomsDiv.appendChild(div);
+					        })
+					        .catch(err => console.error("Fehler beim Laden:", err));
+					    });
+					</script>
 				  </div>
 				</fieldset>
 		
@@ -166,10 +172,5 @@
 
 		
 	</div>
-	
-
-	
-
-
 </body>
 </html>
