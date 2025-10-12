@@ -81,7 +81,7 @@
 					
 					entriesArray.forEach((entry) => {
 						const div = document.createElement('div');
-						const date = entry.date;
+						const date = new Date(entry.date);
 						const dateFormated = date.toLocaleDateString('de-DE', {weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric'});
 						console.log(dateFormated);
 						div.className = 'bg-white rounded-xl shadow-md p-4';
