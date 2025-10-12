@@ -83,13 +83,7 @@
 						const div = document.createElement('div');
 						div.className = 'bg-white rounded-xl shadow-md p-4';
 						const date = entry.date;
-const dateFormatted = date.toLocaleDateString('de-DE', {
-  weekday: 'long',
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric'
-});
-console.log(dateFormatted);
+
 						const date = dateFormatted;
 						div.innerHTML = `
 						<div class="font-bold text-pink-600">${date}</div>
