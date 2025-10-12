@@ -131,13 +131,12 @@
 				<fieldset class="block mb-4">
 				  <legend class="text-gray-700">Symptome:</legend>
 				  <div id="symptoms" class="mt-2 grid grid-cols-2 gap-2">
-						<label for="symptoms">Symptome:</label><br>
-						<select id="symptoms" name="symptoms" multiple size="5"></select>
+						<select id="symptomsSelectBox" name="symptoms" multiple size="5"></select>
 						<script>
-							const symptomsSelect = document.getElementById('symptoms');
+							const symptomsSelect = document.getElementById('symptomsSelectBox');
 							for (const symptom of symptoms) {
 							  const option = new Option(symptom, symptom.toLowerCase());
-							  symptomsSelect.appendChild(option);
+							  symptomsSelectBox.add(option);
 							}
 						</script>
 				  </div>
