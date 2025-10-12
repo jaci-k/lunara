@@ -82,10 +82,8 @@
 					entriesArray.forEach((entry) => {
 						const div = document.createElement('div');
 						div.className = 'bg-white rounded-xl shadow-md p-4';
-						const date = entry.date;
-
 						div.innerHTML = `
-						<div class="font-bold text-pink-600">${date}</div>
+						<div class="font-bold text-pink-600">${entry.date}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
 						<div>⚡ Energie: <strong>${entry.energy || '—'}</strong></div>
 						<div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
