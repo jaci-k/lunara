@@ -84,7 +84,6 @@
 						div.className = 'bg-white rounded-xl shadow-md p-4';
 						const date = entry.date;
 
-						const date = dateFormatted;
 						div.innerHTML = `
 						<div class="font-bold text-pink-600">${date}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
