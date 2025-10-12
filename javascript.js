@@ -84,7 +84,7 @@
 						div.className = 'bg-white rounded-xl shadow-md p-4';
 						const options = { weekday: "long" };
 
-						const date = new Intl.DateTimeFormat("de-DE", options).format(valentines);
+						const date = new Intl.DateTimeFormat("de-DE", options).format(entry.date);
 						div.innerHTML = `
 						<div class="font-bold text-pink-600">${date}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
