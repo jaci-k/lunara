@@ -81,9 +81,12 @@
 					
 					entriesArray.forEach((entry) => {
 						const div = document.createElement('div');
+						const date = entry.date;
+						const dateFormated = date.toLocaleDateString('de-DE', {weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric'});
+						
 						div.className = 'bg-white rounded-xl shadow-md p-4';
 						div.innerHTML = `
-						<div class="font-bold text-pink-600">${entry.date}</div>
+						<div class="font-bold text-pink-600">${dateFormated}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
 						<div>⚡ Energie: <strong>${entry.energy || '—'}</strong></div>
 						<div>🩺 Symptome: ${entry.symptoms && entry.symptoms.length ? entry.symptoms.join(', ') : 'Keine'}</div>
