@@ -82,9 +82,15 @@
 					entriesArray.forEach((entry) => {
 						const div = document.createElement('div');
 						div.className = 'bg-white rounded-xl shadow-md p-4';
-						const options = { weekday: "long" };
-
-						const date = new Intl.DateTimeFormat("de-DE", options).format(entry.date);
+						date = entry.date
+const dateFormatted = date.toLocaleDateString('de-DE', {
+  weekday: 'long',
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+console.log(dateFormatted);
+						const date = dateFormatted;
 						div.innerHTML = `
 						<div class="font-bold text-pink-600">${date}</div>
 						<div>😊 Stimmung: <strong>${entry.mood || '—'}</strong></div>
