@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+
 console.log(process.env.OPENAI_API_KEY ? "API-Key gefunden" : "Kein Key");
 
 // Diese Funktion wird von Netlify automatisch erkannt
@@ -49,4 +49,5 @@ export async function handler(event) {
     return { statusCode: 500, body: String(err) };
   }
 }
+
 
