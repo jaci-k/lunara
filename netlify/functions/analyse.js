@@ -1,17 +1,12 @@
 
-console.log(process.env.OPENAI_API_KEY ? "API-Key gefunden" : "Kein Key");
-
-// Diese Funktion wird von Netlify automatisch erkannt
 export async function handler(event) {
   try {
-    // JSON aus dem Request (vom Browser)
     const { entries } = JSON.parse(event.body || "{}");
 
     if (!entries) {
       return { statusCode: 400, body: "Keine Einträge übergeben" };
     }
 
-    // Anfrage an OpenAI schicken
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -24,7 +19,8 @@ export async function handler(event) {
           {
             role: "system",
             content:
-              "Du bist eine KI, die Stimmungseinträge analysiert und Trends erkennt. Gib eine kurze, freundliche Auswertung in natürlicher Sprache."
+              "Du bist eine KI, die Stimmungseinträge analysiert und Trends erkennt. Du bekommst Objekte, die mood und symptoms enthalten. mood ist von 1-5. wobei 1 das schlechteste und 5 das beste ist.
+              Gib eine kurze, freundliche Auswertung in natürlicher Sprache."
           },
           {
             role: "user",
@@ -36,10 +32,8 @@ export async function handler(event) {
 
     const data = await response.json();
 
-    // Die Antwort von OpenAI (Text)
     const summary = data.choices?.[0]?.message?.content || "Keine Analyse möglich.";
 
-    // Ergebnis an den Browser zurückgeben
     return {
       statusCode: 200,
       body: JSON.stringify({ summary })
@@ -49,5 +43,6 @@ export async function handler(event) {
     return { statusCode: 500, body: String(err) };
   }
 }
+
 
 
