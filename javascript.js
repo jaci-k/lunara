@@ -23,7 +23,7 @@
 	    const app = initializeApp(firebaseConfig);
 	    const db =  getDatabase(app);
 		const auth = getAuth(app);
-		
+
 		document.getElementById("login-btn").addEventListener("click", () => {
 		  const email = document.getElementById("email").value;
 		  const password = document.getElementById("password").value;
@@ -190,8 +190,8 @@
 		loadEntries();
 
   document.getElementById("analyseBtn").addEventListener("click", async () => {
-    const snapshot = ref(db, "entries").once("value");
-    const entries = snapshot.val();
+    const snapshot = await get(ref(db, `entries/`));
+	const entries = snapshot.val();
 
     const res = await fetch("/.netlify/functions/analyse", {
       method: "POST",
