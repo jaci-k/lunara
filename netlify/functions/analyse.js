@@ -2,7 +2,7 @@
 export async function handler(event) {
   try {
     const { entries } = JSON.parse(event.body || "{}");
-
+console.log(entries);
     if (!entries) {
       return { statusCode: 400, body: "Keine Einträge übergeben" };
     }
@@ -43,6 +43,7 @@ export async function handler(event) {
     return { statusCode: 500, body: String(err) };
   }
 }
+
 
 
 
