@@ -192,7 +192,7 @@
   document.getElementById("analyseBtn").addEventListener("click", async () => {
     const snapshot = await get(ref(db, `entries/`));
 	const entries = snapshot.val();
-
+console.log(entries);
     const res = await fetch("/.netlify/functions/analyse", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
