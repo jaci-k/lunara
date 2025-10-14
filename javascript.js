@@ -189,17 +189,19 @@
 		setToday();
 		loadEntries();
 
-  document.getElementById("analyseBtn").addEventListener("click", async () => {
-	const entries = ref(db, 'entries');
-	onValue(entries, (snapshot) => {
-		if (snapshot.exists()) {
-			const entries = snapshot.val(); 
-			const res = await fetch("/.netlify/functions/analyse", {
-			  method: "POST",
-			  headers: { "Content-Type": "application/json" },
-			  body: JSON.stringify({ entries })
-			});
-			const data = await res.json();
-			document.getElementById("result").textContent = data.summary;
-		});
-  });
+document.getElementById("analyseBtn").addEventListener("click", async () => {
+  const entriesRef = ref(db, 'entries');
+  const snapshot = await get(entriesRef);  // ✅ await hier erlaubt
+  if (snapshot.exists()) {
+    const entries = snapshot.val();
+    const res = await fetch("/.netlify/functions/analyse", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ entries })
+    });
+    const data = await res.json();
+    document.getElementById("result").textContent = data.summary;
+  } else {
+    document.getElementById("result").textContent = "Keine Einträge gefunden";
+  }
+});
