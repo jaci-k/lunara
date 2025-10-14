@@ -19,6 +19,23 @@
 
 <script type="module" src="javascript.js"></script>
 <script>const symptoms = ["Schmierblutungen", "Stimmungsschankungen", "Kopfschmerzen", "Bauchschmerzen", "Krämpfe", "Hautprobleme", "Rückenschmerzen", "Brustspannen", "Heißhunger"];</script>
+
+<script>
+  document.getElementById("analyseBtn").addEventListener("click", async () => {
+    const snapshot = await firebase.database().ref("entries").once("value");
+    const entries = snapshot.val();
+
+    const res = await fetch("/.netlify/functions/analyse", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ entries })
+    });
+
+    const data = await res.json();
+    document.getElementById("result").textContent = data.summary;
+  });
+</script>
+	
 <body>
 
 	<div id="loading-screen" class="min-h-screen flex items-center justify-center">
@@ -63,6 +80,13 @@
 		<div class="flex justify-end">
 			<button class="p-3 mb-6 bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600 transition" onclick="logout()">Logout</button>
 		</div>
+
+<button id="analyseBtn">Monat analysieren</button>
+<div id="result"></div>
+
+		
+
+		
 		<div class="grid lg:grid-cols-3 gap-12 lg:p-12">
 			<div>
 			  <h1 class="text-3xl font-bold text-pink-700 mb-6">🌸 Mein Zyklus Tracker</h1>
