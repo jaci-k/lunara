@@ -190,15 +190,16 @@
 		loadEntries();
 
   document.getElementById("analyseBtn").addEventListener("click", async () => {
-    const snapshot = await get(ref(db, `entries/`));
-	const entries = snapshot.val();
-console.log(entries);
-    const res = await fetch("/.netlify/functions/analyse", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ entries })
-    });
-
-    const data = await res.json();
-    document.getElementById("result").textContent = data.summary;
+	const entries = ref(db, 'entries');
+	onValue(entries, (snapshot) => {
+		if (snapshot.exists()) {
+			const entries = snapshot.val(); 
+			const res = await fetch("/.netlify/functions/analyse", {
+			  method: "POST",
+			  headers: { "Content-Type": "application/json" },
+			  body: JSON.stringify({ entries })
+			});
+			const data = await res.json();
+			document.getElementById("result").textContent = data.summary;
+		});
   });
