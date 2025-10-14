@@ -20,21 +20,7 @@
 <script type="module" src="javascript.js"></script>
 <script>const symptoms = ["Schmierblutungen", "Stimmungsschankungen", "Kopfschmerzen", "Bauchschmerzen", "Krämpfe", "Hautprobleme", "Rückenschmerzen", "Brustspannen", "Heißhunger"];</script>
 
-<script>
-  document.getElementById("analyseBtn").addEventListener("click", async () => {
-    const snapshot = await firebase.database().ref("entries").once("value");
-    const entries = snapshot.val();
 
-    const res = await fetch("/.netlify/functions/analyse", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ entries })
-    });
-
-    const data = await res.json();
-    document.getElementById("result").textContent = data.summary;
-  });
-</script>
 	
 <body>
 
@@ -196,5 +182,21 @@
 
 		
 	</div>
+<script>
+  document.getElementById("analyseBtn").addEventListener("click", async () => {
+    const snapshot = await firebase.database().ref("entries").once("value");
+    const entries = snapshot.val();
+
+    const res = await fetch("/.netlify/functions/analyse", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ entries })
+    });
+
+    const data = await res.json();
+    document.getElementById("result").textContent = data.summary;
+  });
+</script>
+	
 </body>
 </html>
