@@ -160,50 +160,35 @@
 			  </form>
 			</div>
 			<div>
-    <div id="picker" class="flex gap-4"></div>
-
-    <script>
-      // === MONATS- UND JAHRESAUSWAHL ===
-      const months = [
-        "Januar", "Februar", "März", "April", "Mai", "Juni",
-        "Juli", "August", "September", "Oktober", "November", "Dezember"
-      ];
-      const years = Array.from({ length: 10 }, (_, i) => 2020 + i);
-
-      // Container für Picker
-      const pickerDiv = document.getElementById("picker");
-
-      // Monat Dropdown
-      const monthSelect = document.createElement("select");
-      monthSelect.className = "border border-gray-300 rounded-xl p-2 shadow-sm focus:ring focus:ring-blue-300";
-      monthSelect.innerHTML = `<option value="">Monat wählen</option>` +
-        months.map((m, i) => `<option value="${i + 1}">${m}</option>`).join("");
-
-      // Jahr Dropdown
-      const yearSelect = document.createElement("select");
-      yearSelect.className = "border border-gray-300 rounded-xl p-2 shadow-sm focus:ring focus:ring-blue-300";
-      yearSelect.innerHTML = `<option value="">Jahr wählen</option>` +
-        years.map(y => `<option value="${y}">${y}</option>`).join("");
-
-      // In DOM einfügen
-      pickerDiv.append(monthSelect, yearSelect);
-
-      // Ausgabe aktualisieren
-      const ausgabe = document.getElementById("auswahl");
-      function updateAuswahl() {
-        const m = monthSelect.value;
-        const y = yearSelect.value;
-        if (m && y) {
-          ausgabe.textContent = `Ausgewählt: ${months[m - 1]} ${y}`;
-        } else {
-          ausgabe.textContent = "Noch nichts ausgewählt";
-        }
-      }
-
-      // Event Listener
-      monthSelect.addEventListener("change", updateAuswahl);
-      yearSelect.addEventListener("change", updateAuswahl);
-    </script>
+				<div id="picker" class="flex gap-4"></div>
+				<script>
+					const months = [
+						"Januar", "Februar", "März", "April", "Mai", "Juni",
+						"Juli", "August", "September", "Oktober", "November", "Dezember"
+					];
+					const years = Array.from({ length: 5 }, (_, i) => 2025 + i);
+					const pickerDiv = document.getElementById("picker");
+					const monthSelect = document.createElement("select");
+					monthSelect.className = "appearance-none focus:outline-none border border-gray-300 rounded-xl p-2 shadow-sm focus:ring focus:ring-pink-300";
+					monthSelect.innerHTML = `<option value="">Monat wählen</option>` + months.map((m, i) => `<option value="${i + 1}">${m}</option>`).join("");
+					const yearSelect = document.createElement("select");
+					yearSelect.className = "appearance-none focus:outline-none border border-gray-300 rounded-xl p-2 shadow-sm focus:ring focus:ring-pink-300";
+					yearSelect.innerHTML = `<option value="">Jahr wählen</option>` + years.map(y => `<option value="${y}">${y}</option>`).join("");
+					
+					const today = new Date();
+					monthSelect.value = today.getMonth() + 1;
+					yearSelect.value = today.getFullYear();
+					
+					pickerDiv.append(monthSelect, yearSelect);
+					
+					function updateMonthYear() {
+						const m = monthSelect.value;
+						const y = yearSelect.value;
+	
+					}
+					monthSelect.addEventListener("change", updateMonthYear);
+					yearSelect.addEventListener("change", updateMonthYear);
+				</script>
 
 
 				<div  class="grid lg:grid-cols-2 gap-12 lg:p-12">
