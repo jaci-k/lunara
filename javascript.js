@@ -78,16 +78,7 @@
        		const y = yearSelect.value;
 
 const startDate = new Date(y+'-'+m+'-01');
-const q = query(
-  collection(db, "events"),
-  where("date", ">=", startDate)
-);
-
-const snapshot = await getDocs(q);
-
-snapshot.forEach(doc => {
-  console.log(doc.id, " => ", doc.data());
-});
+console.log(startDate);
 
 			
 			onValue(entries, (snapshot) => {
