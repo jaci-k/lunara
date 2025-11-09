@@ -1,5 +1,5 @@
 	  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-	  import { getDatabase, ref, push, onValue, remove, set, get } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+	  import { getDatabase, getDocs, ref, push, onValue, remove, set, get } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 		import {
 		  getAuth,
 		  signInWithEmailAndPassword,
@@ -76,7 +76,20 @@
 			const monthSelect = document.getElementById("monthSelect");
 			const m = monthSelect.value;
        		const y = yearSelect.value;
-			console.log(m + ' ' + y);
+
+const startDate = new Date(y+'-'+m+'-01');
+const q = query(
+  collection(db, "events"),
+  where("date", ">=", startDate)
+);
+
+const snapshot = await getDocs(q);
+
+snapshot.forEach(doc => {
+  console.log(doc.id, " => ", doc.data());
+});
+
+			
 			onValue(entries, (snapshot) => {
 				entriesDiv.innerHTML = '';
 			 	if (snapshot.exists()) {
