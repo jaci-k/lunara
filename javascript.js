@@ -194,6 +194,9 @@
 		setToday();
 		loadEntries();
 
+					monthSelect.addEventListener("change", loadEntries());
+					yearSelect.addEventListener("change", loadEntries());
+
 document.getElementById("analyseBtn").addEventListener("click", async () => {
   const entriesRef = ref(db, 'entries');
   const snapshot = await get(entriesRef);  // ✅ await hier erlaubt
