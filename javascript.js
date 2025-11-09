@@ -196,8 +196,8 @@
 
 	const yearSelect = document.getElementById("yearSelect");
 	const monthSelect = document.getElementById("monthSelect");
-	monthSelect.addEventListener("change", loadEntries());
-	yearSelect.addEventListener("change", loadEntries());
+	monthSelect.addEventListener("change", loadEntries);
+	yearSelect.addEventListener("change", loadEntries);
 
 document.getElementById("analyseBtn").addEventListener("click", async () => {
   const entriesRef = ref(db, 'entries');
