@@ -72,6 +72,11 @@
 
 		function loadEntries() {
 			const entries = ref(db, 'entries');
+			const yearSelect = document.getElementById("yearSelect");
+			const monthSelect = document.getElementById("monthSelect");
+			const m = monthSelect.value;
+       		const y = yearSelect.value;
+			console.log(m + ' ' + y);
 			onValue(entries, (snapshot) => {
 				entriesDiv.innerHTML = '';
 			 	if (snapshot.exists()) {
