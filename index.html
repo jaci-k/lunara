@@ -169,10 +169,12 @@
 					const years = Array.from({ length: 5 }, (_, i) => 2025 + i);
 					const pickerDiv = document.getElementById("picker");
 					const monthSelect = document.createElement("select");
+					monthSelect.id = "monthSelect";
 					monthSelect.className = "appearance-none focus:outline-none border border-gray-300 rounded-xl p-2 shadow-sm focus:ring focus:ring-pink-300";
 					monthSelect.innerHTML = months.map((m, i) => `<option value="${i + 1}">${m}</option>`).join("");
 					const yearSelect = document.createElement("select");
 					yearSelect.className = "appearance-none focus:outline-none border border-gray-300 rounded-xl p-2 shadow-sm focus:ring focus:ring-pink-300";
+					yearSelect.id = "yearSelect";
 					yearSelect.innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join("");
 					
 					const today = new Date();
